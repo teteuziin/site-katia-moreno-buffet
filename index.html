@@ -82,6 +82,8 @@
       .wrap { max-width: 1200px; margin: 0 auto; padding-left: var(--pad-x); padding-right: var(--pad-x); }
       section { padding-top: var(--sec-y); padding-bottom: var(--sec-y); }
       main > section + section { border-top: 1px solid transparent; }
+      /* âncora nunca cai debaixo do cabeçalho fixo: título da seção sempre visível, sem nada por cima */
+      section[id] { scroll-margin-top: 84px; }
 
       /* ---------- intro: o convite se abre (≤1,8s; só existe com JS) ---------- */
       .intro { display: none; }
@@ -115,8 +117,8 @@
         animation: seal-form .8s cubic-bezier(.2,.8,.3,1.15) both;
       }
       @keyframes seal-form { from { opacity: 0; transform: scale(.3) rotate(-30deg); } to { opacity: 1; transform: scale(1) rotate(-6deg); } }
-      .intro-name { font-family: var(--script); font-size: clamp(2.4rem, 8vw, 3.4rem); line-height: 1; color: var(--rose-deep); display: block; animation: intro-rise .6s ease .25s both; }
-      .intro-sub { display: block; margin-top: 10px; font-size: .78rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); font-weight: 600; animation: intro-rise .6s ease .4s both; }
+      .intro-name { font-family: var(--script); font-size: clamp(2.4rem, 8vw, 3.4rem); line-height: 1.35; color: var(--rose-deep); display: block; padding-bottom: 4px; animation: intro-rise .6s ease .25s both; }
+      .intro-sub { display: block; margin-top: 14px; font-size: .78rem; letter-spacing: .22em; line-height: 1.6; text-transform: uppercase; color: var(--gold); font-weight: 600; animation: intro-rise .6s ease .4s both; }
       @keyframes intro-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
       .intro.gone { display: none !important; }
       .intro.gone .intro-leaf.left { transform: translateX(-104%); }
@@ -143,8 +145,8 @@
       }
       .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; min-height: 48px; }
       .brand img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid var(--rose-soft); }
-      .brand-script { font-family: var(--script); font-size: 1.9rem; line-height: .9; color: var(--rose-deep); display: block; }
-      .brand-sub { font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); font-weight: 600; display: block; margin-top: 3px; }
+      .brand-script { font-family: var(--script); font-size: 1.9rem; line-height: 1.3; color: var(--rose-deep); display: block; padding-bottom: 2px; }
+      .brand-sub { font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); font-weight: 600; display: block; margin-top: 5px; }
       nav.main-nav { margin-left: auto; display: flex; gap: 4px; }
       nav.main-nav a {
         text-decoration: none; font-size: .92rem; font-weight: 400; padding: 8px 12px;
@@ -185,10 +187,12 @@
       .hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center 38%; }
       .hero::after {
         content: ""; position: absolute; inset: 0; z-index: -1;
-        background: linear-gradient(180deg, rgba(30, 20, 14, .38) 0%, rgba(30, 20, 14, .04) 32%, rgba(30, 20, 14, .52) 70%, rgba(24, 16, 10, .88) 100%);
+        background: linear-gradient(180deg, rgba(30, 20, 14, .58) 0%, rgba(30, 20, 14, .30) 30%, rgba(30, 20, 14, .62) 62%, rgba(24, 16, 10, .93) 100%);
       }
+      /* texto do hero nunca disputa com a foto: véu forte + sombra de leitura */
+      .hero-script, .hero h1, .hero p.lead { text-shadow: 0 2px 20px rgba(18, 10, 5, .65), 0 1px 4px rgba(18, 10, 5, .7); }
       .hero-in { width: 100%; max-width: 1200px; margin: 0 auto; padding: 128px var(--pad-x) 56px; }
-      .hero-script { font-family: var(--script); font-size: clamp(2.2rem, 5.5vw, 3.4rem); color: var(--rose-soft); line-height: 1; display: block; margin-bottom: 8px; }
+      .hero-script { font-family: var(--script); font-size: clamp(2.2rem, 5.5vw, 3.4rem); color: var(--rose-soft); line-height: 1.4; display: block; margin-bottom: 12px; padding-bottom: 4px; }
       /* entrada do hero em cena, sem depender de rolagem */
       @keyframes hero-rise { from { transform: translateY(20px); } to { transform: none; } }
       @keyframes hero-img-in { from { transform: scale(1.08); } to { transform: scale(1); } }
@@ -202,7 +206,7 @@
         .hero .hero-script, .hero h1, .hero p.lead, .hero-ctas, .hero .stats, .hero-bg img { animation: none; }
       }
       .hero h1 {
-        font-family: var(--serif); font-weight: 700; line-height: 1.14;
+        font-family: var(--serif); font-weight: 700; line-height: 1.2;
         font-size: clamp(2.6rem, 7vw, 5rem); margin: 0 0 20px; max-width: 15ch; text-wrap: balance;
       }
       .hero h1 em { font-style: italic; color: var(--champagne); }
@@ -219,9 +223,9 @@
       .stat-label { font-size: .86rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--champagne); margin-top: 8px; }
 
       /* ---------- títulos de seção ---------- */
-      .script-kicker { font-family: var(--script); font-size: clamp(2.1rem, 4vw, 2.8rem); color: var(--rose); line-height: 1.3; display: block; margin-bottom: 10px; }
+      .script-kicker { font-family: var(--script); font-size: clamp(2.1rem, 4vw, 2.8rem); color: var(--rose); line-height: 1.45; display: block; margin-bottom: 14px; padding-bottom: 4px; }
       h2 {
-        font-family: var(--serif); font-weight: 700; line-height: 1.18;
+        font-family: var(--serif); font-weight: 700; line-height: 1.24;
         font-size: clamp(2.05rem, 4.6vw, 3.25rem); margin: 0 0 18px; text-wrap: balance;
       }
       h2 em { font-style: italic; color: var(--rose-deep); }
@@ -246,13 +250,13 @@
         transition: transform .6s cubic-bezier(.2, .7, .2, 1), box-shadow .6s ease;
       }
       .polaroid figcaption, .polaroid .pol-cap {
-        display: block;
-        font-family: var(--script); font-size: 1.6rem; line-height: 1.35; text-align: center;
-        color: #6e3d46; padding-top: 12px;
+        display: block; position: relative; z-index: 1;
+        font-family: var(--script); font-size: 1.6rem; line-height: 1.5; text-align: center;
+        color: #6e3d46; padding-top: 14px;
       }
       .polaroid .pol-cap small, .polaroid figcaption small {
-        display: block; font-family: var(--sans); font-size: .72rem; letter-spacing: .14em;
-        text-transform: uppercase; color: #8a765c; margin-top: 4px;
+        display: block; font-family: var(--sans); font-size: .72rem; letter-spacing: .14em; line-height: 1.5;
+        text-transform: uppercase; color: #8a765c; margin-top: 6px;
       }
       .polaroid { position: relative; }
       /* selo gira ao entrar em cena */
@@ -336,26 +340,29 @@
       .pillar:hover { transform: translateX(8px); border-color: var(--rose-soft); box-shadow: var(--shadow-sm); }
       .pillar-num {
         font-family: var(--script); font-size: 2.4rem; color: var(--rose);
-        line-height: .8; flex: none; width: 40px; text-align: center;
+        line-height: 1.1; flex: none; width: 40px; text-align: center; padding-top: 2px;
       }
       .pillar h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; margin: 0 0 6px; line-height: 1.25; }
       .pillar p { margin: 0; color: var(--ink-soft); font-size: 1.04rem; line-height: 1.68; }
-      .fs-photo { transform: rotate(2.5deg); max-width: 440px; margin: 0 auto; width: 100%; }
+      .fs-photo { transform: rotate(1.3deg); max-width: 440px; margin: 8px auto; width: 100%; }
       .fs-photo:hover { transform: rotate(0deg) scale(1.015); box-shadow: var(--shadow); }
       .fs-photo .video-frame { position: relative; border-radius: 3px; overflow: hidden; background: #14100b; }
       .fs-photo video { width: 100%; aspect-ratio: 9 / 13; max-height: 600px; object-fit: cover; }
       figure { margin: 0; }
       .video-play {
-        position: absolute; inset: 0; display: flex; flex-direction: column; gap: 12px;
-        align-items: center; justify-content: center; border: 0; background: rgba(20, 12, 8, .3);
+        position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; gap: 12px;
+        align-items: center; justify-content: center; border: 0; background: rgba(20, 12, 8, .68);
+        -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
         color: #fffaf0; font-family: var(--sans); font-size: .95rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
-        width: 100%; min-height: 48px;
+        width: 100%; min-height: 48px; text-shadow: 0 1px 6px rgba(0, 0, 0, .6);
       }
+      /* nos cards com legenda, o botão cobre SÓ o vídeo — a legenda fica fora, em faixa própria */
+      .videos-grid .video-play { bottom: auto; aspect-ratio: 9 / 14; max-height: 540px; }
       /* selo de som: o vídeo tem faixa de áudio e toca com som ao dar play */
       .sound-badge {
-        position: absolute; top: 12px; right: 12px; z-index: 3;
+        position: absolute; top: 12px; right: 12px; z-index: 4;
         display: inline-flex; align-items: center; gap: 7px;
-        background: rgba(18, 10, 7, .78); color: #fff6e8;
+        background: rgba(18, 10, 7, .94); color: #fff6e8;
         font-family: var(--sans); font-size: .78rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
         padding: 8px 12px; border-radius: 999px; border: 1px solid rgba(255, 246, 232, .45);
         pointer-events: none;
@@ -397,7 +404,7 @@
         background: var(--paper); border: 1px solid var(--line); border-radius: 16px; padding: 24px;
         box-shadow: var(--shadow-sm);
       }
-      .tl-time { font-family: var(--script); font-size: 1.95rem; color: var(--rose); line-height: 1.3; display: block; margin-bottom: 6px; }
+      .tl-time { font-family: var(--script); font-size: 1.95rem; color: var(--rose); line-height: 1.45; display: block; margin-bottom: 8px; padding-bottom: 2px; }
       .tl-card h3 { font-family: var(--serif); font-size: 1.55rem; font-weight: 700; margin: 0 0 8px; line-height: 1.25; }
       .tl-card p { margin: 0; color: var(--ink-soft); font-size: 1.04rem; line-height: 1.68; }
       @media (max-width: 720px) {
@@ -418,15 +425,15 @@
         content: ""; position: absolute; inset: 10px; border: 1px solid var(--line);
         border-radius: 5px; pointer-events: none;
       }
-      .invite-script { font-family: var(--script); font-size: clamp(2.6rem, 6vw, 3.8rem); color: var(--rose); line-height: 1.05; margin: 0; }
+      .invite-script { font-family: var(--script); font-size: clamp(2.6rem, 6vw, 3.8rem); color: var(--rose); line-height: 1.35; margin: 0 0 8px; padding-bottom: 4px; }
       .invite h2 { margin-top: 8px; }
       .invite .price-value { font-family: var(--serif); font-weight: 700; font-size: clamp(3.4rem, 9vw, 5rem); line-height: 1; margin: 16px 0 8px; color: var(--ink); }
       .invite .price-for { font-size: 1.08rem; color: var(--ink-soft); margin: 0 auto 32px; max-width: 46ch; }
       .seal {
-        width: 88px; height: 88px; margin: 0 auto 24px; border-radius: 50%;
+        width: 88px; height: 88px; margin: 0 auto 28px; border-radius: 50%;
         background: radial-gradient(circle at 34% 30%, var(--rose-soft), var(--rose) 58%, var(--rose-deep));
         color: #fff6ec; display: grid; place-items: center; text-align: center;
-        font-family: var(--script); font-size: 1.5rem; line-height: 1; padding: 10px;
+        font-family: var(--script); font-size: 1.35rem; line-height: 1.2; padding: 10px; white-space: nowrap;
         box-shadow: 0 12px 28px rgba(150, 82, 95, .4), inset 0 0 0 3px rgba(255, 246, 236, .35);
         transform: rotate(-8deg);
       }
@@ -446,7 +453,7 @@
       .quote-band .wrap { text-align: center; }
       .quote-band blockquote {
         font-family: var(--script); font-weight: 400;
-        font-size: clamp(2.2rem, 5.6vw, 3.6rem); line-height: 1.25; margin: 0 0 16px; text-wrap: balance; color: var(--ink);
+        font-size: clamp(2.2rem, 5.6vw, 3.6rem); line-height: 1.45; margin: 0 0 20px; text-wrap: balance; color: var(--ink);
       }
       .quote-band blockquote em { font-style: normal; color: var(--rose); }
       .quote-band p { margin: 0; color: var(--ink-soft); font-size: .95rem; letter-spacing: .05em; }
@@ -456,10 +463,15 @@
       @media (max-width: 900px) { .gallery { columns: 2; } }
       @media (max-width: 520px) { .gallery { columns: 2; column-gap: 16px; } }
       .g-item {
-        display: block; width: 100%; border: 0; padding: 0; background: none; text-align: inherit; font: inherit;
-        break-inside: avoid; margin: 0 0 24px; cursor: pointer;
+        display: block; width: 100%; border: 0; padding: 10px 8px; background: none; text-align: inherit; font: inherit;
+        break-inside: avoid; margin: 0 0 16px; cursor: pointer;
       }
-      @media (max-width: 520px) { .g-item { margin-bottom: 16px; } }
+      @media (max-width: 520px) { .g-item { margin-bottom: 8px; padding: 8px 4px; } }
+      /* em tela estreita a polaroid NÃO gira: rotação zero = legenda nunca invade a vizinha */
+      @media (max-width: 640px) {
+        .g-item .polaroid, .videos-grid .polaroid, .fs-photo, .sobre-photo { transform: none; }
+        .g-item:hover .polaroid, .g-item:focus-visible .polaroid, .videos-grid .polaroid:hover, .fs-photo:hover, .sobre-photo:hover { transform: none; }
+      }
       .g-item .polaroid { transform: rotate(var(--tilt, -1.6deg)); }
       .g-item:hover .polaroid, .g-item:focus-visible .polaroid { transform: rotate(0deg) translateY(-6px); box-shadow: var(--shadow); }
       .g-item img { width: 100%; object-fit: cover; object-position: center 26%; border-radius: 3px; aspect-ratio: var(--ar, 3 / 4); transition: transform .8s cubic-bezier(.2, .7, .2, 1); }
@@ -473,8 +485,8 @@
       }
       .lightbox.open { display: flex; }
       .lightbox img { max-width: min(94vw, 880px); max-height: 76vh; border-radius: 10px; object-fit: contain; box-shadow: 0 32px 80px rgba(0,0,0,.5); border: 8px solid #fffefb; }
-      .lb-cap { color: #f7eedd; margin-top: 16px; text-align: center; font-size: .98rem; }
-      .lb-cap b { font-family: var(--script); font-weight: 400; font-size: 1.9rem; display: block; color: var(--rose-soft); }
+      .lb-cap { color: #f7eedd; margin-top: 16px; text-align: center; font-size: .98rem; line-height: 1.6; }
+      .lb-cap b { font-family: var(--script); font-weight: 400; font-size: 1.9rem; line-height: 1.4; display: block; color: var(--rose-soft); margin-bottom: 4px; padding-bottom: 2px; }
       .lb-btn {
         position: absolute; width: 52px; height: 52px; border-radius: 50%; border: 1px solid rgba(255,250,240,.4);
         background: rgba(255, 250, 240, .08); color: #fffaf0; display: grid; place-items: center; min-height: 48px;
@@ -493,22 +505,23 @@
       .videos-grid .polaroid:hover { transform: rotate(0deg) translateY(-6px); box-shadow: var(--shadow); }
       .video-frame { position: relative; border-radius: 3px; overflow: hidden; background: #14100b; }
       .video-frame video { width: 100%; aspect-ratio: 9 / 14; max-height: 540px; object-fit: cover; }
+      /* legenda do vídeo NÃO fica mais sobre o vídeo: faixa sólida própria, abaixo do quadro */
       .video-frame figcaption {
-        position: absolute; left: 0; right: 0; bottom: 0; padding: 32px 16px 12px;
-        background: linear-gradient(transparent, rgba(12, 8, 6, .8)); color: #f7eedd;
-        font-size: .9rem; pointer-events: none;
+        position: static; padding: 14px 16px 16px;
+        background: #241a12; color: #f7eedd;
+        font-size: .9rem; line-height: 1.55;
       }
-      .video-frame figcaption b { font-family: var(--serif); font-size: 1.12rem; display: block; }
+      .video-frame figcaption b { font-family: var(--serif); font-size: 1.12rem; line-height: 1.3; display: block; margin-bottom: 4px; }
 
       /* ---------- sobre ---------- */
       .sobre-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(32px, 5vw, 64px); align-items: center; }
       @media (max-width: 860px) { .sobre-grid { grid-template-columns: 1fr; } }
-      .sobre-photo { transform: rotate(-2.5deg); max-width: 288px; width: 100%; margin: 0 auto; }
+      .sobre-photo { transform: rotate(-1.3deg); max-width: 288px; width: 100%; margin: 8px auto; }
       .sobre-photo:hover { transform: rotate(0deg) scale(1.015); box-shadow: var(--shadow); }
       .sobre-photo img { border-radius: 3px; aspect-ratio: 1 / 1; object-fit: cover; object-position: center 22%; width: 100%; }
       .sobre-quote {
         font-family: var(--script); font-size: clamp(1.9rem, 4vw, 2.5rem);
-        line-height: 1.25; color: var(--rose-deep); margin: 24px 0; max-width: 30ch;
+        line-height: 1.45; color: var(--rose-deep); margin: 24px 0; max-width: 30ch;
       }
       .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
       .chip {
@@ -555,8 +568,8 @@
       details:first-of-type { border-top: 1px solid var(--line); }
       summary {
         list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px;
-        min-height: 52px; padding: 8px 2px; font-family: var(--serif); font-weight: 700;
-        font-size: 1.28rem; line-height: 1.25;
+        min-height: 52px; padding: 10px 2px; font-family: var(--serif); font-weight: 700;
+        font-size: 1.28rem; line-height: 1.4;
       }
       summary::-webkit-details-marker { display: none; }
       summary .fx {
@@ -573,7 +586,7 @@
       }
       @media (prefers-color-scheme: dark) { footer { background: #171008; } }
       .footer-in { display: flex; flex-wrap: wrap; gap: 32px; justify-content: space-between; }
-      .footer-script { font-family: var(--script); font-size: 2.6rem; color: #fff6ea; line-height: 1; margin: 0; }
+      .footer-script { font-family: var(--script); font-size: 2.6rem; color: #fff6ea; line-height: 1.3; margin: 0; padding-bottom: 4px; }
       .footer-brand small { display: block; font-family: var(--sans); font-size: .68rem; letter-spacing: .26em; text-transform: uppercase; color: var(--gold-soft); margin-top: 6px; font-weight: 500; }
       footer a { color: #ead9bd; text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; }
       footer a:hover { color: var(--rose-soft); }
@@ -1157,6 +1170,25 @@
             if (p && p.catch) p.catch(function () { /* controles nativos visíveis: é só tocar no play do vídeo */ });
           });
         });
+
+        /* ---------- pausa automática: vídeo tocando que sai da tela, PAUSA ----------
+           Limiar ~0,25: menos de 25% do vídeo visível = fora de cena.
+           Ao voltar pra tela, NÃO retoma sozinho — quem dá play de novo é a pessoa.
+           O pause() dispara o listener de 'pause' acima, então o selo volta
+           para "Com som" e os controles nativos mostram o estado pausado. */
+        if ("IntersectionObserver" in window) {
+          var videoVisibility = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+              var v = en.target;
+              if (en.intersectionRatio < 0.25 && !v.paused && !v.ended) {
+                v.pause();
+              }
+            });
+          }, { threshold: [0, 0.25, 0.5] });
+          document.querySelectorAll("video").forEach(function (v) {
+            videoVisibility.observe(v);
+          });
+        }
 
         /* ---------- preço do convite: contagem ao entrar em cena ---------- */
         (function initPrice() {
